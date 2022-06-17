@@ -101,14 +101,20 @@ const Bengals = () => {
   ]);
 
   let totalSumVar = 0;
+
   // add item handle submit new items
   const handleClick = (item) => {
     setNewList([...NewList, item]);
-    // sum
-    let num = item.cost;
-    let numVal = parseFloat(num.substring(1));
-    totalSumVar += numVal;
+    sumOf(item.cost);
+  };
+  // sum
+  const sumOf = (item) => {
+    NewList.map((NewList) => {});
+    let itemCost = item;
+    let costInt = parseFloat(itemCost.substring(1));
+    totalSumVar += costInt;
     console.log(totalSumVar);
+    return totalSumVar;
   };
 
   // const reasons = [
@@ -155,7 +161,7 @@ const Bengals = () => {
                   <BenaglImgage src={cat.img} alt={cat.description} />
                   <h4>{cat.description}</h4>
                   <p>{cat.cost}</p>
-                  <button onClick={() => handleClick(cat)}>Buy now</button>
+                  <button onClick={(e) => handleClick(cat)}>Buy now</button>
                 </div>
               </EachBengal>
             ))}
