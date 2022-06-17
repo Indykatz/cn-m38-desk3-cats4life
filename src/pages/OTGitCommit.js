@@ -1,9 +1,17 @@
-import React from 'react'
+import OllyAdd from "../components/OllyAddItems";
+import { TheApp, Content, Description } from "../css/App.styled";
 
-const OTGitCommit = () => {
+const Olly = () => {
   return (
-    <div>OTGitCommit</div>
-  )
-}
+    <TheApp>
+      <Content>
+        <Description>
+          <p>Olly</p>
+        </Description>
+        <OllyAdd />
+      </Content>
+    </TheApp>
+  );
+};
 
-export default OTGitCommit
+export default Olly;
