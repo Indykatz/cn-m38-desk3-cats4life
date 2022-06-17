@@ -31,6 +31,9 @@ const NavBar = () => {
             <NavItem>
               <NavLink to="/checkout">Checkout</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink to="/example">Example</NavLink>
+            </NavItem>
           </NavMenu>
 
           {/* <NavBtn>

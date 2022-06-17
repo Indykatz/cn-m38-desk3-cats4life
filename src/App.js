@@ -13,6 +13,7 @@ import Checkout from "./pages/Checkout";
 // style
 import { TheApp } from "./css/App.styled";
 import About from "./pages/About";
+import Example from "./pages/Example";
 
 // App
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/Breeds" element={<Breeds />} />
           <Route path="/Bengals" element={<Benagls />} />
           <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/Example" element={<Example />} />
         </Routes>
         <FooterBanner />
       </BrowserRouter>
