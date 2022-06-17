@@ -27,12 +27,32 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const [NewList, setNewList] = useState([
+    {
+      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+    },
+  ]);
+  
+  let totalSumVar = 0;
+  // add item handle submit new items
+  const handleClick = (item, e) => {
+    setNewList([...NewList, item]);
+    // sum
+    let num = item.cost;
+    let numVal = parseFloat(num.substring(1));
+    totalSumVar += numVal;
+    console.log(totalSumVar);
+    e.preventDefault()
+
+  };
+
   return (
     <TheApp>
       {error && <p>{error}</p>}
       <Content>
         <Description>
           <p>Home</p>
+          Total Items {NewList.length} : Total Cost £{totalSumVar}
         </Description>
         <CatFlex>
           {catsInformation.map((cats) => (
@@ -41,7 +61,7 @@ const Home = () => {
               <h3>{faker.name.findName()}</h3>
               <p>{faker.finance.amount(100, 200, 2, "£")}</p>
               <p>{faker.word.adjective()}</p>
-              <button>Click</button>
+              <button onClick={() => handleClick(catsInformation)}>Click</button>
             </EachCat>
           ))}
         </CatFlex>
