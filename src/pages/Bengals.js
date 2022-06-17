@@ -17,10 +17,6 @@ import mira1 from "../images/Mira1.JPG";
 import mira2 from "../images/Mira2.JPG";
 import mira3 from "../images/Mira3.JPG";
 import mira4 from "../images/Mira4.JPG";
-import nuka1 from "../images/Nuka1.JPG";
-import nuka2 from "../images/Nuka2.JPG";
-import nuka3 from "../images/Nuka3.JPG";
-import nuka4 from "../images/Nuka4.JPG";
 
 const Bengals = () => {
   const [cat] = useState([
@@ -64,26 +60,6 @@ const Bengals = () => {
       description: "Samira Playing",
       cost: faker.finance.amount(100000000, 200000000, 2, "£"),
     },
-    {
-      img: nuka1,
-      description: "Nuka and Aryeh",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
-    },
-    {
-      img: nuka2,
-      description: "All three",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
-    },
-    {
-      img: nuka3,
-      description: "Samira and Nuka Kissing",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
-    },
-    {
-      img: nuka4,
-      description: "Samira and Nuka",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
-    },
   ]);
   // useState animal
   const [cats, setCats] = useState([]);
@@ -118,25 +94,44 @@ const Bengals = () => {
 
   const [NewList, setNewList] = useState([
     {
-      img: nuka4,
-      description: "Samira and Nuka",
+      img: mira3,
+      description: "Samira Spotted a Fly",
       cost: faker.finance.amount(100000000, 200000000, 2, "£"),
     },
   ]);
 
+  let totalSumVar = 0;
   // add item handle submit new items
-  const [itemInput, setItemInput] = useState("");
-  const handleClick = (index) => {
-    setNewList([...NewList, { NewList: itemInput }]);
-    setItemInput("");
-    console.log(NewList);
+  const handleClick = (item) => {
+    setNewList([...NewList, item]);
+    // sum
+    let num = item.cost;
+    let numVal = parseFloat(num.substring(1));
+    totalSumVar += numVal;
+    console.log(totalSumVar);
   };
+
+  // const reasons = [
+  //   "You can't buy these cats",
+  //   "Haha as if",
+  //   "Not today",
+  //   "On your bike",
+  //   "These cats are not for sale",
+  //   "Not for all the money in the world",
+  // ];
+
+  // // add item handle submit new items
+  // const handleClick = (e) => {
+  //   const randromReason = reasons[Math.floor(Math.random() * reasons.length)];
+  //   alert(randromReason);
+  // };
 
   return (
     <div>
       <Content>
         <Description>
-          <p>Bengal - {}</p>
+          <p>Bengal</p>
+          Total Items {NewList.length} : Total Cost £{totalSumVar}
         </Description>
         {/* error */}
         {error && <p>{error}</p>}
@@ -160,7 +155,7 @@ const Bengals = () => {
                   <BenaglImgage src={cat.img} alt={cat.description} />
                   <h4>{cat.description}</h4>
                   <p>{cat.cost}</p>
-                  <button onClick={handleClick}>Buy now</button>
+                  <button onClick={() => handleClick(cat)}>Buy now</button>
                 </div>
               </EachBengal>
             ))}

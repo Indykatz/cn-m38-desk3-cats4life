@@ -10,12 +10,10 @@ const KatAddItem = () => {
   const [NewList, setNewList] = useState([
     { item1: "I", item2: "Am", item3: "Here" },
   ]);
-
   // add item handle submit new items
-  const [itemInput, setItemInput] = useState("");
-  const handleClick = (index) => {
-    setNewList([...NewList, { NewList: itemInput }]);
-    setItemInput("");
+  // const [itemInput, setItemInput] = useState("");
+  const handleClick = (item) => {
+    setNewList([...NewList, item]);
     console.log(NewList);
   };
 
@@ -29,7 +27,7 @@ const KatAddItem = () => {
               {items.item1}
               {items.item2}
               {items.item3}
-              <button onClick={handleClick}>Click</button>
+              <button onClick={() => handleClick(items)}>Click</button>
             </p>
           </div>
         ))}
