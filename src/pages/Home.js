@@ -27,21 +27,48 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const [NewList, setNewList] = useState([]);
+
+  // add item handle submit new items
+  const handleClick = (cats) => {
+    setNewList([...NewList, cats]);
+  };
+
+  let total = 0;
+  for (let i = 0; i < NewList.length; i++) {
+    console.log(NewList[i].cost);
+    let theCost = NewList[i].cost;
+    console.log(theCost);
+    let anInt = parseInt(theCost);
+    total += anInt;
+  }
+
+  // add item handle submit new items
+  const handleCheckout = () => {
+    alert("Total cost: ", total);
+  };
+
   return (
     <TheApp>
       {error && <p>{error}</p>}
       <Content>
         <Description>
           <p>Home</p>
+          Total Items {NewList.length} : Total Cost £{total}
+          <p>
+            <button onClick={() => handleCheckout()}>Check Out</button>
+          </p>
         </Description>
         <CatFlex>
           {catsInformation.map((cats) => (
             <EachCat key={cats.id}>
               <CatImgage src={cats.url} alt="cats" />
-              <h3>{faker.name.findName()}</h3>
-              <p>{faker.finance.amount(100, 200, 2, "£")}</p>
+              <h3>
+                {faker.name.findName()} is {faker.word.adjective()}
+              </h3>
+              <p>£{faker.finance.amount(100, 200, 0)}</p>
               <p>{faker.word.adjective()}</p>
-              <button>Click</button>
+              <button onClick={() => handleClick(cats)}>Buy now</button>
             </EachCat>
           ))}
         </CatFlex>

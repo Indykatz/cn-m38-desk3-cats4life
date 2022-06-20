@@ -23,42 +23,42 @@ const Bengals = () => {
     {
       img: aryeh1,
       description: "Aryeh Looking down at humans",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+      cost: faker.finance.amount(100000000, 200000000, 0),
     },
     {
       img: aryeh2,
       description: "Aryeh Lounging",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+      cost: faker.finance.amount(100000000, 200000000, 0),
     },
     {
       img: aryeh3,
       description: "Aryeh Sleeping",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+      cost: faker.finance.amount(100000000, 200000000, 0),
     },
     {
       img: aryeh4,
       description: "Aryeh Attacking a Tree",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+      cost: faker.finance.amount(100000000, 200000000, 0),
     },
     {
       img: mira1,
       description: "Samira Up High",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+      cost: faker.finance.amount(100000000, 200000000, 0),
     },
     {
       img: mira2,
       description: "Samira Posing",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+      cost: faker.finance.amount(100000000, 200000000, 0),
     },
     {
       img: mira3,
       description: "Samira Spotted a Fly",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+      cost: faker.finance.amount(100000000, 200000000, 0),
     },
     {
       img: mira4,
       description: "Samira Playing",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+      cost: faker.finance.amount(100000000, 200000000, 0),
     },
   ]);
   // useState animal
@@ -96,48 +96,49 @@ const Bengals = () => {
     {
       img: mira3,
       description: "Samira Spotted a Fly",
-      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+      cost: faker.finance.amount(100000000, 200000000, 0),
     },
   ]);
-
-  let totalSumVar = 0;
 
   // add item handle submit new items
   const handleClick = (item) => {
     setNewList([...NewList, item]);
-    sumOf(item.cost);
-  };
-  // sum
-  const sumOf = (item) => {
-    NewList.map((NewList) => {});
-    let itemCost = item;
-    let costInt = parseFloat(itemCost.substring(1));
-    totalSumVar += costInt;
-    console.log(totalSumVar);
-    return totalSumVar;
   };
 
-  // const reasons = [
-  //   "You can't buy these cats",
-  //   "Haha as if",
-  //   "Not today",
-  //   "On your bike",
-  //   "These cats are not for sale",
-  //   "Not for all the money in the world",
-  // ];
+  let total = 0;
+  for (let i = 0; i < NewList.length; i++) {
+    // let costInt = parseFloat(NewList[i].sum.substring(1));
+    console.log(NewList[i].cost);
+    let theCost = NewList[i].cost;
+    console.log(theCost);
+    let anInt = parseInt(theCost);
+    total += anInt;
+  }
 
-  // // add item handle submit new items
-  // const handleClick = (e) => {
-  //   const randromReason = reasons[Math.floor(Math.random() * reasons.length)];
-  //   alert(randromReason);
-  // };
+  const reasons = [
+    "You can't buy these cats",
+    "Haha as if",
+    "Not today",
+    "On your bike",
+    "These cats are not for sale",
+    "Not for all the money in the world",
+  ];
+
+  // add item handle submit new items
+  const handleCheckout = () => {
+    const randromReason = reasons[Math.floor(Math.random() * reasons.length)];
+    alert(randromReason);
+  };
 
   return (
     <div>
       <Content>
         <Description>
           <p>Bengal</p>
-          Total Items {NewList.length} : Total Cost £{totalSumVar}
+          Total Items {NewList.length} : Total Cost £{total}
+          <p>
+            <button onClick={() => handleCheckout()}>Check Out</button>
+          </p>
         </Description>
         {/* error */}
         {error && <p>{error}</p>}
@@ -160,7 +161,7 @@ const Bengals = () => {
                 <div>
                   <BenaglImgage src={cat.img} alt={cat.description} />
                   <h4>{cat.description}</h4>
-                  <p>{cat.cost}</p>
+                  <p>£{cat.cost}</p>
                   <button onClick={(e) => handleClick(cat)}>Buy now</button>
                 </div>
               </EachBengal>
