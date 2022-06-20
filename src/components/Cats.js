@@ -4,7 +4,11 @@ import { CatImgage, CatFlex, EachCat } from "../css/Home.styled";
 import { faker } from "@faker-js/faker";
 
 const Home = () => {
-  const [catsInformation, setCatsinformation] = useState([]);
+  const [catImg, setCatImg] = useState([]);
+  const [catName, setcatName] = useState([]);
+  const [catWord, setcatWord] = useState([]);
+  const [catCost, setCatCost] = useState([]);
+
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -17,7 +21,10 @@ const Home = () => {
           throw new Error(response.statusText);
         }
         const data = await response.json();
-        setCatsinformation(data);
+        setCatImg(data);
+        setcatName(faker.name.findName());
+        setcatWord(faker.word.adjective());
+        setCatCost(faker.finance.amount(100, 200, 0));
         console.log(data);
       } catch (error) {
         console.log(error);
@@ -30,7 +37,8 @@ const Home = () => {
   const [NewList, setNewList] = useState([]);
 
   // add item handle submit new items
-  const handleClick = (cats) => {
+  const handleClick = (e, cats) => {
+    e.preventDefault();
     setNewList([...NewList, cats]);
   };
 
@@ -60,13 +68,14 @@ const Home = () => {
           </p>
         </Description>
         <CatFlex>
-          {catsInformation.map((cats) => (
-            <EachCat key={cats.id} name={cats.name} cost={cats.cost}>
-              <CatImgage img={cats.img} src={cats.url} alt="cats" />
-              <h3>{faker.name.findName()}</h3>
-              <p>£{faker.finance.amount(100, 200, 0)}</p>
-              <p>{faker.word.adjective()}</p>
-              <button onClick={() => handleClick(cats)}>Buy now</button>
+          {catImg.map((catImg) => (
+            <EachCat key={catImg.id}>
+              <CatImgage src={catImg.url} alt="cats" />
+              <h3>{catName}</h3>
+              <p>{catWord}</p>
+              <p>£{catCost}</p>
+
+              <button onClick={(e) => handleClick(catImg)}>Buy now</button>
             </EachCat>
           ))}
         </CatFlex>
