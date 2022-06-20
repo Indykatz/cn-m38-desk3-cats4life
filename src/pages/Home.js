@@ -27,25 +27,22 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const [NewList, setNewList] = useState([]);
+  const [NewList, setNewList] = useState([
+    {
+      cost: faker.finance.amount(100000000, 200000000, 2, "£"),
+    },
+  ]);
 
+  let totalSumVar = 0;
   // add item handle submit new items
-  const handleClick = (cats) => {
-    setNewList([...NewList, cats]);
-  };
-
-  let total = 0;
-  for (let i = 0; i < NewList.length; i++) {
-    console.log(NewList[i].cost);
-    let theCost = NewList[i].cost;
-    console.log(theCost);
-    let anInt = parseInt(theCost);
-    total += anInt;
-  }
-
-  // add item handle submit new items
-  const handleCheckout = () => {
-    alert("Total cost: ", total);
+  const handleClick = (item, e) => {
+    setNewList([...NewList, item]);
+    // sum
+    let num = item.cost;
+    let numVal = parseFloat(num.substring(1));
+    totalSumVar += numVal;
+    console.log(totalSumVar);
+    e.preventDefault();
   };
 
   return (
@@ -54,19 +51,18 @@ const Home = () => {
       <Content>
         <Description>
           <p>Home</p>
-          Total Items {NewList.length} : Total Cost £{total}
-          <p>
-            <button onClick={() => handleCheckout()}>Check Out</button>
-          </p>
+          Total Items {NewList.length} : Total Cost £{totalSumVar}
         </Description>
         <CatFlex>
           {catsInformation.map((cats) => (
-            <EachCat key={cats.id} name={cats.name} cost={cats.cost}>
-              <CatImgage img={cats.img} src={cats.url} alt="cats" />
+            <EachCat key={cats.id}>
+              <CatImgage src={cats.url} alt="cats" />
               <h3>{faker.name.findName()}</h3>
-              <p>£{faker.finance.amount(100, 200, 0)}</p>
+              <p>{faker.finance.amount(100, 200, 2, "£")}</p>
               <p>{faker.word.adjective()}</p>
-              <button onClick={() => handleClick(cats)}>Buy now</button>
+              <button onClick={() => handleClick(catsInformation)}>
+                Click
+              </button>
             </EachCat>
           ))}
         </CatFlex>
