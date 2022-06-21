@@ -32,7 +32,7 @@ const Home = () => {
       cost: faker.finance.amount(100000000, 200000000, 2, "£"),
     },
   ]);
-  
+
   let totalSumVar = 0;
   // add item handle submit new items
   const handleClick = (item, e) => {
@@ -42,8 +42,7 @@ const Home = () => {
     let numVal = parseFloat(num.substring(1));
     totalSumVar += numVal;
     console.log(totalSumVar);
-    e.preventDefault()
-
+    e.preventDefault();
   };
 
   return (
@@ -61,7 +60,9 @@ const Home = () => {
               <h3>{faker.name.findName()}</h3>
               <p>{faker.finance.amount(100, 200, 2, "£")}</p>
               <p>{faker.word.adjective()}</p>
-              <button onClick={() => handleClick(catsInformation)}>Click</button>
+              <button onClick={() => handleClick(catsInformation)}>
+                Click
+              </button>
             </EachCat>
           ))}
         </CatFlex>
